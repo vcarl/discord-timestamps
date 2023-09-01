@@ -8,6 +8,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react": "^18.2.21",
+    "lodash": "^4.17.21",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-calendar": "^4.6.0",
