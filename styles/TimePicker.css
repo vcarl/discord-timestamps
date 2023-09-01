@@ -11,10 +11,13 @@
 }
 
 .react-time-picker::after {
+  display: block;
   content: "(drag the hands)";
-  display: inline-block;
   position: absolute;
-  bottom: 0;
+  bottom: 1.25rem;
+  margin-left: -1.5rem;
+  width: 100%;
+  text-align: center;
   color: rgba(249, 249, 249, 0.6);
   font-size: 0.6rem;
   text-rendering: optimizeLegibility;
@@ -61,6 +64,8 @@
   pointer-events: none;
   background-color: rgb(88, 101, 242);
   transform-origin: bottom;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 .react-clock__hand__body::after {
   pointer-events: all;
@@ -70,10 +75,16 @@
   height: 0.75rem;
   border-radius: 100%;
   background: rgb(88, 101, 242);
-  transform: translate(-0.325rem, -0.5rem);
-  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
+  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 0.5px;
   cursor: var(--grabbing);
 }
+.react-clock__hand__body.react-clock__minute-hand__body::after {
+  transform: translate(-0.325rem, 0.1rem);
+}
+.react-clock__hand__body.react-clock__hour-hand__body::after {
+  transform: translate(-0.25rem, 0.1rem);
+}
+
 .react-time-picker .react-clock__mark__body {
   background-color: rgba(249, 249, 249, 0.2);
 }
