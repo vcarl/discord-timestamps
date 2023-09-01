@@ -4,40 +4,62 @@ import "react-time-picker/dist/TimePicker.css";
 import { throttle } from "lodash";
 
 /**
+ * Given a center point and an angle, create a projection function that accepts
+ * coordinates, and returns new coordinates representing an x/y position assuming
+ * the provided angle is the 0 degree angle.
+ * @param {number} cx
+ * @param {number} cy
+ * @param {number} angle
+ * @returns {(x: number, y: number) => [number, number]}
+ */
+const createProjection = (centerX, centerY, angleRad) => (x, y) => {
+  const adjustedX =
+    Math.cos(angleRad) * (x - centerX) + Math.sin(angleRad) * (y - centerY);
+  const adjustedY =
+    -Math.sin(angleRad) * (x - centerX) + Math.cos(angleRad) * (y - centerY);
+  return [adjustedX, adjustedY];
+};
+
+/**
  * @param {HTMLElement} root
  * @param {HTMLElement} element
  * @param {(degreesRotated: number) => void} onRelease
  */
 const handleDrag = (root, element, onRelease, clockSegments) => {
-  let startingAngle;
+  let projection;
   let angle;
   const drag = throttle((e) => {
     e.preventDefault();
     const rect = root.getBoundingClientRect();
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const deltaY = y - cy;
-    const deltaX = x - cx;
-    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    if (!startingAngle) {
-      startingAngle = angle;
+    if (!projection) {
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const deltaY = y - cy;
+      const deltaX = x - cx;
+      projection = createProjection(cx, cy, Math.atan2(deltaY, deltaX));
     }
-    let diff = angle - startingAngle;
+    const [dx, dy] = projection(x, y);
+    angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
-    element.style.transform = `translateX(-50%) rotate(${diff}deg)`;
+    element.style.transform = `translateX(-50%) rotate(${angle}deg)`;
   }, 16);
   const stop = () => {
+    // Reset styles
     element.style.transform = `translateX(-50%)`;
     element.style.setProperty("--grabbing", "grab");
     document.removeEventListener("pointermove", drag);
     document.removeEventListener("pointerup", stop);
 
-    let changedAngle =
-      (angle + 90 - (startingAngle + 90)) / (360 / clockSegments);
+    // UX: Snap to nearest segment
+    let changedAngle = angle / (360 / clockSegments);
+    // UX: Make fine adjustments easier by always moving at least 1 tick
     changedAngle =
       changedAngle > 0 ? Math.ceil(changedAngle) : Math.floor(changedAngle);
+    // Reset state
+    angle = undefined;
+    projection = undefined;
     onRelease(changedAngle * (360 / clockSegments));
   };
   const onPointerDown = (e) => {
