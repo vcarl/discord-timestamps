@@ -25,7 +25,11 @@ a {
   border-radius: 0.3rem;
   box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
 }
-.control.open {
-  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.2) 0px 2px 10px 0px;
+
+nav {
+  flex: 1 0 13.625rem;
+  background-color: rgb(43, 45, 49);
+}
+.content {
+  flex: 1 1 50rem;
 }
