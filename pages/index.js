@@ -22,10 +22,7 @@ const Nav = ({ className }) => {
     <nav className={`${className} py-[3.75rem] pl-5 pr-3`}>
       <h1 className="px-2 py-1">A Reactiflux Project</h1>
       <ul>
-        <NavItem className="active">Generator</NavItem>
-        <NavItem>
-          <a href="https://www.reactiflux.com">Write React? Join</a>
-        </NavItem>
+        <NavItem className="active">Timestamp Generator</NavItem>
       </ul>
     </nav>
   );
@@ -48,7 +45,7 @@ export default function Home() {
         <title>Discord Timestamps</title>
         <meta
           name="description"
-          content="A simple app for generating relative timestamps in Discord"
+          content="A simple app for generating relative timestamps in Discord. A [Reactiflux](https://reactiflux.com) project by [Carl Vitullo](https://www.linkedin.com/in/carl-vitullo-a7488728/).]"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -79,11 +76,11 @@ export default function Home() {
         <div className="bg-fill md:block hidden" />
         <footer className="md:col-span-2 md:col-start-2 py-24 px-5">
           <p>
-            Created by Carl Vitullo (vcarl):{" "}
+            Created by{" "}
             <a href="https://www.linkedin.com/in/carl-vitullo-a7488728/">
-              LinkedIn
+              Carl Vitullo
             </a>{" "}
-            |{" "}
+            <a href="https://bsky.app/profile/vcarl.bsky.social">(vcarl)</a> |{" "}
             <a href="https://github.com/vcarl/discord-timestamps">
               Project GitHub
             </a>
@@ -91,6 +88,10 @@ export default function Home() {
           <p>
             Need help with a community?{" "}
             <a href="https://calendly.com/vcarl/">Book some time</a>
+          </p>
+          <p>
+            Are you a React/JS dev?{" "}
+            <a href="https://www.reactiflux.com">Join Reactiflux</a>
           </p>
         </footer>
       </div>
