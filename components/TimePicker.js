@@ -51,6 +51,7 @@ const handleDrag = (root, element, onRelease, clockSegments) => {
     element.style.setProperty("--grabbing", "grab");
     document.removeEventListener("pointermove", drag);
     document.removeEventListener("pointerup", stop);
+    document.removeEventListener("pointercancel", stop);
 
     // UX: Snap to nearest segment
     let changedAngle = angle / (360 / clockSegments);
@@ -68,6 +69,7 @@ const handleDrag = (root, element, onRelease, clockSegments) => {
     element.style.setProperty("--grabbing", "grabbing");
     document.addEventListener("pointermove", drag);
     document.addEventListener("pointerup", stop);
+    document.addEventListener("pointercancel", stop);
   };
   element.addEventListener("pointerdown", onPointerDown);
   return () => {

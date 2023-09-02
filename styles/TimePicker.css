@@ -50,6 +50,8 @@
   z-index: 1;
 }
 .react-clock {
+  pointer-events: none;
+  touch-action: none;
   width: 100% !important;
   height: 100% !important;
 }
