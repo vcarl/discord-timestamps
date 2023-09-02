@@ -13,7 +13,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: rgb(255, 255, 255);
   text-decoration: none;
 }
 
@@ -34,6 +34,9 @@ nav li {
   background-color: (78, 80, 88, 0.3);
   border-radius: 0.25rem;
   font-size: 0.95rem;
+}
+nav li a {
+  color: rgb(181, 186, 193);
 }
 nav li.active {
   background-color: rgba(78, 80, 88, 0.6);

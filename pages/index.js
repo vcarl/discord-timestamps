@@ -77,8 +77,21 @@ export default function Home() {
           </ForceClient>
         </main>
         <div className="bg-fill md:block hidden" />
-        <footer className="md:col-span-2 md:col-start-2 p-24">
-          test butts
+        <footer className="md:col-span-2 md:col-start-2 py-24 px-5">
+          <p>
+            Created by Carl Vitullo (vcarl):{" "}
+            <a href="https://www.linkedin.com/in/carl-vitullo-a7488728/">
+              LinkedIn
+            </a>{" "}
+            |{" "}
+            <a href="https://github.com/vcarl/discord-timestamps">
+              Project GitHub
+            </a>
+          </p>
+          <p>
+            Need help with a community?{" "}
+            <a href="https://calendly.com/vcarl/">Book some time</a>
+          </p>
         </footer>
       </div>
     </>
