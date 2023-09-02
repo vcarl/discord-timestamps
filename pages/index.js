@@ -59,16 +59,16 @@ export default function Home() {
 
       <div className="grid md:grid-rows-layout md:grid-cols-layout">
         <Nav className="md:col-start-2" />
-        <main className="py-16 pl-10 pr-5">
+        <main className="py-16 pl-10 pr-5 overflow-hidden">
           <ForceClient>
-            <div className="flex -ml-2 pb-6">
+            <div className="flex -ml-2 pb-6 md:flex-row flex-col">
               <DatePicker
-                className="mx-2"
+                className="md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
                 onChange={(e) => setDate(e)}
               />
               <TimePicker
-                className="mx-2"
+                className="md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
                 onChange={(e) => setDate(e)}
               />

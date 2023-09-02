@@ -63,6 +63,7 @@ const handleDrag = (root, element, onRelease, clockSegments) => {
     onRelease(changedAngle * (360 / clockSegments));
   };
   const onPointerDown = (e) => {
+    e.preventDefault();
     drag(e);
     element.style.setProperty("--grabbing", "grabbing");
     document.addEventListener("pointermove", drag);
@@ -132,23 +133,21 @@ export default function TimePicker({ onChange, value, className, ...props }) {
   });
 
   return (
-    <div>
-      <ReactTimePicker
-        className={`control ${className}`}
-        clearIcon={null}
-        clockIcon={null}
-        renderSecondHand={false}
-        shouldCloseClock={() => false}
-        minuteMarksWidth={0.5}
-        hourHandLength={55}
-        minuteHandLength={85}
-        hourHandOppositeLength={0}
-        minuteHandOppositeLength={0}
-        isOpen={true}
-        onChange={innerOnChange}
-        value={value}
-        {...props}
-      />
-    </div>
+    <ReactTimePicker
+      className={`control ${className}`}
+      clearIcon={null}
+      clockIcon={null}
+      renderSecondHand={false}
+      shouldCloseClock={() => false}
+      minuteMarksWidth={0.5}
+      hourHandLength={55}
+      minuteHandLength={85}
+      hourHandOppositeLength={0}
+      minuteHandOppositeLength={0}
+      isOpen={true}
+      onChange={innerOnChange}
+      value={value}
+      {...props}
+    />
   );
 }

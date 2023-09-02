@@ -9,9 +9,9 @@ const TimestampRow = ({ unixTime, format }) => {
       <div>
         <code className={`${style.timestamp} p-1 -my-2`}>{stamp}</code>{" "}
       </div>
-      <CopyButton className="w-4" text={stamp} />
-      <div className="">
-        <span className={`grow text-center ${style.formattedTime}`}>
+      <CopyButton className="w-4 flex-shrink-0" text={stamp} />
+      <div className="max-w-[5rem]">
+        <span className={`${style.formattedTime}`}>
           {formatDate(unixTime, format)}
         </span>
       </div>
@@ -29,7 +29,7 @@ const formats = ["t", "T", "d", "D", "f", "F", "R"];
 const DiscordTimestamps = ({ datetime, className }) => {
   const unixTime = Number(Math.floor(datetime / 1000));
   return (
-    <div className={`${className} container`}>
+    <div className={`${className}`}>
       {formats.map((f) => (
         <TimestampRow key={f} unixTime={unixTime} format={f} />
       ))}

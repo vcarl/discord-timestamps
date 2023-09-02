@@ -2,6 +2,9 @@
   background-color: rgba(78, 80, 88, 0.48);
   color: rgb(219, 222, 225);
   border-radius: 0.1875rem;
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .timestamp {
