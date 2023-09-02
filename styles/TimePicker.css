@@ -18,7 +18,7 @@
   margin-left: -1.5rem;
   width: 100%;
   text-align: center;
-  color: rgba(249, 249, 249, 0.6);
+  color: rgb(148, 155, 164);
   font-size: 0.6rem;
   text-rendering: optimizeLegibility;
 }
@@ -43,7 +43,7 @@
   width: 12rem;
   height: 12rem !important;
   max-width: 100vw;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: unset;
   border: 0;
   z-index: 1;
