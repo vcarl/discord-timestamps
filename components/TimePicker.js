@@ -135,9 +135,9 @@ export default function TimePicker({ onChange, value, className, ...props }) {
   });
 
   return (
-    <div /* This is a load-bearing div */>
+    <div className={className}>
       <ReactTimePicker
-        className={`control ${className}`}
+        className="control"
         clearIcon={null}
         clockIcon={null}
         renderSecondHand={false}
