@@ -135,21 +135,23 @@ export default function TimePicker({ onChange, value, className, ...props }) {
   });
 
   return (
-    <ReactTimePicker
-      className={`control ${className}`}
-      clearIcon={null}
-      clockIcon={null}
-      renderSecondHand={false}
-      shouldCloseClock={() => false}
-      minuteMarksWidth={0.5}
-      hourHandLength={55}
-      minuteHandLength={85}
-      hourHandOppositeLength={0}
-      minuteHandOppositeLength={0}
-      isOpen={true}
-      onChange={innerOnChange}
-      value={value}
-      {...props}
-    />
+    <div /* This is a load-bearing div */>
+      <ReactTimePicker
+        className={`control ${className}`}
+        clearIcon={null}
+        clockIcon={null}
+        renderSecondHand={false}
+        shouldCloseClock={() => false}
+        minuteMarksWidth={0.5}
+        hourHandLength={55}
+        minuteHandLength={85}
+        hourHandOppositeLength={0}
+        minuteHandOppositeLength={0}
+        isOpen={true}
+        onChange={innerOnChange}
+        value={value}
+        {...props}
+      />
+    </div>
   );
 }
