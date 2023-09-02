@@ -8,8 +8,8 @@ body {
   margin: 0;
   font-family: Helvetica, sans-serif;
 
-  color: #fff;
-  background-color: rgb(49, 51, 56);
+  color: rgb(181, 186, 193);
+  background-color: rgb(43, 45, 49);
 }
 
 a {
@@ -21,15 +21,47 @@ a {
   box-sizing: border-box;
 }
 
-.control {
-  border-radius: 0.3rem;
-  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
+.bg-fill {
+  background-color: rgb(49, 51, 56);
 }
 
 nav {
   flex: 1 0 13.625rem;
   background-color: rgb(43, 45, 49);
 }
-.content {
+
+nav li {
+  background-color: (78, 80, 88, 0.3);
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+}
+nav li.active {
+  background-color: rgba(78, 80, 88, 0.6);
+  color: rgb(255, 255, 255);
+}
+
+nav hr {
+  background-color: rgba(78, 80, 88, 0.48);
+  margin: 0.625rem 0.5rem;
+  height: 1px;
+}
+
+footer {
+}
+
+main {
   flex: 1 1 50rem;
+  background-color: rgb(49, 51, 56);
+}
+
+h1 {
+  color: rgb(148, 155, 164);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.control {
+  border-radius: 0.3rem;
+  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
 }

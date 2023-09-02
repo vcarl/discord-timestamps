@@ -13,6 +13,24 @@ const now = new Date();
 now.setMinutes(0);
 now.setSeconds(0);
 
+const NavItem = ({ children, className }) => {
+  return <li className={`${className} px-2 py-1`}>{children}</li>;
+};
+
+const Nav = ({ className }) => {
+  return (
+    <nav className={`${className} py-[3.75rem] pl-5 pr-3`}>
+      <h1 className="px-2 py-1">A Reactiflux Project</h1>
+      <ul>
+        <NavItem className="active">Generator</NavItem>
+        <NavItem>
+          <a href="https://www.reactiflux.com">Write React? Join</a>
+        </NavItem>
+      </ul>
+    </nav>
+  );
+};
+
 export default function Home() {
   const [datetime, setDate] = useState(now);
   useEffect(() => {
@@ -39,9 +57,9 @@ export default function Home() {
         src="https://www.googletagmanager.com/gtag/js?id=G-3BBW7XEREH"
       ></Script>
 
-      <div className="flex">
-        <nav></nav>
-        <main className="content min-h-screen py-16 pl-10">
+      <div className="grid md:grid-rows-layout md:grid-cols-layout">
+        <Nav className="md:col-start-2" />
+        <main className="py-16 pl-10 pr-5">
           <ForceClient>
             <div className="flex -ml-2 pb-6">
               <DatePicker
@@ -58,9 +76,11 @@ export default function Home() {
             <DiscordTimestamps datetime={datetime} />
           </ForceClient>
         </main>
+        <div className="bg-fill md:block hidden" />
+        <footer className="md:col-span-2 md:col-start-2 p-24">
+          test butts
+        </footer>
       </div>
-
-      <footer className=""></footer>
     </>
   );
 }

@@ -8,7 +8,10 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        layout: "1fr min-content 1fr",
+        layout: `1fr 13.625rem min(35rem) 1fr`,
+      },
+      gridTemplateRows: {
+        layout: "auto min-content",
       },
     },
   },

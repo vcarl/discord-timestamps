@@ -24,6 +24,7 @@
 }
 
 .react-time-picker .react-time-picker__inputGroup {
+  color: #fff;
   border: 0;
   flex-grow: 0;
   font-size: 1rem;
