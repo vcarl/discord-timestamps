@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import Script from "next/script";
 
 import DatePicker from "../components/DatePicker";
 import TimePicker from "../components/TimePicker";
@@ -14,6 +15,15 @@ now.setSeconds(0);
 
 export default function Home() {
   const [datetime, setDate] = useState(now);
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-3BBW7XEREH");
+  });
+
   return (
     <>
       <Head>
@@ -24,6 +34,10 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-3BBW7XEREH"
+      ></Script>
 
       <div className="flex">
         <nav></nav>
