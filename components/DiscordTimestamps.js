@@ -30,6 +30,18 @@ const DiscordTimestamps = ({ datetime, className }) => {
   const unixTime = Number(Math.floor(datetime / 1000));
   return (
     <div className={`${className}`}>
+      <p>
+        Copy full date
+        <CopyButton
+          className="w-4 flex-shrink-0"
+          text={`<t:${unixTime}:f>, <t:${unixTime}:R>`}
+        />
+      </p>
+      <span className={`${style.formattedTime}`}>
+        {" "}
+        {formatDate(unixTime, "f")}, {formatDate(unixTime, "R")}
+      </span>
+      <div className="hr" />
       {formats.map((f) => (
         <TimestampRow key={f} unixTime={unixTime} format={f} />
       ))}

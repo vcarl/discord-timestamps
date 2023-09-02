@@ -43,16 +43,20 @@ nav li.active {
   color: rgb(255, 255, 255);
 }
 
-nav hr {
-  background-color: rgba(78, 80, 88, 0.48);
-  margin: 0.625rem 0.5rem;
-  height: 1px;
+nav .hr {
+  margin: 0.625rem 0;
 }
 
 footer {
   font-size: 0.8rem;
 }
 
+.hr {
+  background-color: rgba(78, 80, 88, 0.48);
+  margin: 1.5rem 0;
+  display: block;
+  height: 1px;
+}
 main {
   flex: 1 1 50rem;
   background-color: rgb(49, 51, 56);
