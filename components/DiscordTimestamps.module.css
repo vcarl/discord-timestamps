@@ -1,0 +1,13 @@
+.formattedTime {
+  background-color: rgba(78, 80, 88, 0.48);
+  color: rgb(219, 222, 225);
+  border-radius: 0.1875rem;
+}
+
+.timestamp {
+  background-color: rgb(43, 45, 49);
+  color: rgb(219, 222, 225);
+  border-radius: 3px;
+  font-size: 85%;
+  text-indent: 0;
+}
