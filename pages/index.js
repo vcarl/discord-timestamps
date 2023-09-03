@@ -8,6 +8,7 @@ import DatePicker from "../components/DatePicker";
 import TimePicker from "../components/TimePicker";
 import DiscordTimestamps from "../components/DiscordTimestamps";
 import ForceClient from "../components/ForceClient";
+import { Presets } from "../components/Presets";
 
 const now = new Date();
 now.setMinutes(0);
@@ -57,6 +58,7 @@ export default function Home() {
       <div className="grid md:grid-rows-layout md:grid-cols-layout">
         <Nav className="md:col-start-2" />
         <main className="py-16 pl-10 pr-5 overflow-hidden">
+          <Presets className="mb-4" date={datetime} setDate={setDate} />
           <ForceClient>
             <div className="flex -ml-2 pb-6 md:flex-row flex-col">
               <DatePicker

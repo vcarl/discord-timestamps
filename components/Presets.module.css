@@ -1,0 +1,14 @@
+.button {
+  border-radius: 0.1875rem;
+  border: 1px solid rgb(78, 80, 88);
+  transition: background 0.2s ease 0s;
+}
+.button:hover {
+  background-color: rgb(78, 80, 88);
+  background-color: rgb(78, 80, 88);
+}
+.button.active {
+  background-color: rgb(88, 101, 242);
+  border-color: rgb(88, 101, 242);
+  color: #fff;
+}
