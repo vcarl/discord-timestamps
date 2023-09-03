@@ -22,6 +22,7 @@ export default function DatePicker({ value, onChange, className, ...props }) {
   );
   return (
     <ReactCalendar
+      calendarType="US"
       className={`control ${className}`}
       closeCalendar={false}
       shouldCloseCalendar={() => false}
