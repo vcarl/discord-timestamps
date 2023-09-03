@@ -23,6 +23,11 @@
   text-rendering: optimizeLegibility;
 }
 
+.react-time-picker option {
+  color: #000;
+  background-color: rgb(43, 45, 49);
+}
+
 .react-time-picker .react-time-picker__inputGroup {
   color: #fff;
   border: 0;
@@ -31,6 +36,17 @@
   font-style: bold;
   text-transform: uppercase;
   font-family: Helvetica;
+  border: 1px solid rgb(78, 80, 88);
+  border-radius: 0.1875rem;
+  padding: 0.125rem 1rem;
+}
+
+.react-time-picker__inputGroup__input {
+  padding: 0;
+  margin-top: 0.0625rem;
+}
+.react-time-picker__inputGroup__amPm {
+  margin-right: -0.5rem;
 }
 
 .react-time-picker .react-time-picker__wrapper {
