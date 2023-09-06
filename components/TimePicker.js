@@ -20,14 +20,35 @@ const createProjection = (centerX, centerY, angleRad) => (x, y) => {
   return [adjustedX, adjustedY];
 };
 
+function getHourHandRotation(startMinute) {
+  const degreesPerMinute = 0.5;
+  const minRotation = -startMinute * degreesPerMinute;
+  const maxRotation = minRotation + 60 * degreesPerMinute; // Maximum range is one hour ahead
+
+  return (degrees) => {
+    const range = maxRotation - minRotation;
+    return (
+      ((((degrees / 12 - minRotation) % range) + range) % range) + minRotation
+    );
+  };
+}
+
 /**
  * @param {HTMLElement} root
  * @param {HTMLElement} element
  * @param {(degreesRotated: number) => void} onRelease
  */
-const handleDrag = (root, element, onRelease, clockSegments) => {
+const handleDrag = (
+  startingMinute,
+  root,
+  element,
+  largerHand,
+  onRelease,
+  clockSegments,
+) => {
   let projection;
   let angle;
+  const hourHand = largerHand ? getHourHandRotation(startingMinute) : undefined;
   const drag = throttle((e) => {
     e.preventDefault();
     const rect = root.getBoundingClientRect();
@@ -44,9 +65,17 @@ const handleDrag = (root, element, onRelease, clockSegments) => {
     angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
     element.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+    if (largerHand) {
+      largerHand.style.transform = `translateX(-50%) rotate(${hourHand?.(
+        angle,
+      )}deg)`;
+    }
   }, 16);
   const stop = () => {
     // Reset styles
+    if (largerHand) {
+      largerHand.style.transform = `translateX(-50%)`;
+    }
     element.style.transform = `translateX(-50%)`;
     element.style.setProperty("--grabbing", "grab");
     document.removeEventListener("pointermove", drag);
@@ -98,8 +127,10 @@ export default function TimePicker({ onChange, value, className, ...props }) {
   useEffect(() => {
     const clock = document.querySelector(".react-clock");
     const minuteUnsub = handleDrag(
+      valueRef.current.getMinutes(),
       clock,
       document.querySelector(".react-clock__minute-hand__body"),
+      document.querySelector(".react-clock__hour-hand__body"),
       (degrees) => {
         const change = (degrees / 360) * 60;
         const date = new Date(valueRef.current);
@@ -113,8 +144,10 @@ export default function TimePicker({ onChange, value, className, ...props }) {
       60,
     );
     const hourUnsub = handleDrag(
+      valueRef.current.getMinutes(),
       clock,
       document.querySelector(".react-clock__hour-hand__body"),
+      undefined,
       (degrees) => {
         const change = (degrees / 360) * 12;
         const date = new Date(valueRef.current);
