@@ -46,7 +46,7 @@ export default function Home() {
         <title>Discord Timestamps</title>
         <meta
           name="description"
-          content="A simple app for generating relative timestamps in Discord. A [Reactiflux](https://reactiflux.com) project by [Carl Vitullo](https://www.linkedin.com/in/carl-vitullo-a7488728/).]"
+          content="A simple app for generating relative timestamps in Discord. A Reactiflux project by vcarl."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
