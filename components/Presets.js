@@ -128,33 +128,33 @@ export const Presets = ({ className, date, setDate }) => {
         </PresetButton>
       </PresetRow>
       <PresetRow>
-        <div className="mr-2 mb-2 text-sm py-1">Next week:</div>
+        <div className="mr-2 mb-2 text-sm py-1">Next:</div>
         <PresetButton preset={presets.nextMonday} date={date} setDate={setDate}>
-          Mon
+          M
         </PresetButton>
         <PresetButton
           preset={presets.nextTuesday}
           date={date}
           setDate={setDate}
         >
-          Tues
+          Tu
         </PresetButton>
         <PresetButton
           preset={presets.nextWednesday}
           date={date}
           setDate={setDate}
         >
-          Weds
+          W
         </PresetButton>
         <PresetButton
           preset={presets.nextThursday}
           date={date}
           setDate={setDate}
         >
-          Thurs
+          Th
         </PresetButton>
         <PresetButton preset={presets.nextFriday} date={date} setDate={setDate}>
-          Fri
+          F
         </PresetButton>
       </PresetRow>
 
