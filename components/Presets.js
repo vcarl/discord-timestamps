@@ -1,9 +1,6 @@
 import style from "./Presets.module.css";
 
 const presets = {
-  today: "today",
-  yesterday: "yesterday",
-  tomorrow: "tomorrow",
   nextMonday: "next monday",
   nextTuesday: "next tuesday",
   nextWednesday: "next wednesday",
@@ -16,9 +13,6 @@ const presets = {
 };
 
 const datePresets = [
-  presets.today,
-  presets.yesterday,
-  presets.tomorrow,
   presets.nextMonday,
   presets.nextTuesday,
   presets.nextWednesday,
@@ -44,15 +38,6 @@ const handlePresetClick = (preset, initialDate, setDate) => (e) => {
     date.setFullYear(now.getFullYear());
   }
   switch (preset) {
-    case presets.today:
-      date.setDate(now.getDate());
-      break;
-    case presets.yesterday:
-      date.setDate(now.getDate() - 1);
-      break;
-    case presets.tomorrow:
-      date.setDate(now.getDate() + 1);
-      break;
     case presets.nextMonday:
       date.setDate(now.getDate() + ((1 - now.getDay()) % 7) + 7);
       break;
@@ -101,12 +86,6 @@ const isActive = (preset, date) => {
   const hours = date.getHours();
   const day = date.getDate();
   switch (preset) {
-    case presets.today:
-      return day === now.getDate();
-    case presets.yesterday:
-      return day === now.getDate() - 1;
-    case presets.tomorrow:
-      return day === now.getDate() + 1;
     case presets.nextMonday:
       return day === now.getDate() + ((8 - now.getDay()) % 7) + 7;
     case presets.nextTuesday:
@@ -133,17 +112,6 @@ const isActive = (preset, date) => {
 export const Presets = ({ className, date, setDate }) => {
   return (
     <div className={`${className}`}>
-      <PresetRow>
-        <PresetButton preset={presets.today} date={date} setDate={setDate}>
-          Today
-        </PresetButton>
-        <PresetButton preset={presets.yesterday} date={date} setDate={setDate}>
-          Yesterday
-        </PresetButton>
-        <PresetButton preset={presets.tomorrow} date={date} setDate={setDate}>
-          Tomorrow
-        </PresetButton>
-      </PresetRow>
       <PresetRow>
         <div className="mr-2 mb-2 text-sm py-1">Next:</div>
         <PresetButton preset={presets.nextMonday} date={date} setDate={setDate}>
