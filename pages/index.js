@@ -64,12 +64,12 @@ export default function Home() {
               <DatePicker
                 className="md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
-                onChange={(e) => setDate(e)}
+                onChange={setDate}
               />
               <TimePicker
                 className="md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
-                onChange={(e) => setDate(e)}
+                onChange={setDate}
               />
             </div>
             <DiscordTimestamps datetime={datetime} />
