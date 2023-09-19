@@ -1,7 +1,7 @@
 .react-date-picker__calendar {
   position: unset !important;
 }
-.react-calendar abbr {
+.react-calendar .react-calendar__month-view__weekdays abbr {
   text-decoration: none !important;
 }
 
@@ -31,8 +31,16 @@
   border-color: rgb(30, 31, 34);
   border-top-width: 1px;
   border-left-width: 1px;
+  border-bottom-width: 1px;
+  margin-bottom: -1px;
   width: 2rem;
   height: 2rem;
+}
+
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile {
+  border-right-width: 1px;
+  margin-left: -1px;
 }
 
 .react-calendar__tile--active {
@@ -73,10 +81,17 @@
   font-family: monospace;
 }
 
-.react-calendar__navigation__label__labelText {
+.react-calendar__navigation__label__labelText,
+.react-calendar__year-view abbr,
+.react-calendar__decade-view abbr {
   text-align: center;
-  text-transform: uppercase;
+  text-transform: uppercase !important;
   font-weight: bold;
   font-size: 0.75rem;
   color: #fff;
+}
+
+.react-calendar__year-view abbr,
+.react-calendar__decade-view abbr {
+  color: rgba(249, 249, 249, 0.6);
 }
