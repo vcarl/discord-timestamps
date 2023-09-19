@@ -15,6 +15,17 @@ const presets = {
   night: "night",
 };
 
+const datePresets = [
+  presets.today,
+  presets.yesterday,
+  presets.tomorrow,
+  presets.nextMonday,
+  presets.nextTuesday,
+  presets.nextWednesday,
+  presets.nextThursday,
+  presets.nextFriday,
+];
+
 /**
  * handlePresetClick takes a day of week or time, and returns an event handler that sets the current date to that day of week or time.
  * @param {string} preset
@@ -23,9 +34,15 @@ const presets = {
  * @returns {React.MouseEventHandler<HTMLButtonElement>}
  */
 const handlePresetClick = (preset, initialDate, setDate) => (e) => {
+  e.preventDefault();
   const now = new Date();
   const date = new Date(initialDate);
-  e.preventDefault();
+  // If a date-related preset was clicked on, make sure month and year are set to
+  // the current month and year. This avoids a bug around the end of the month.
+  if (datePresets.includes(preset)) {
+    date.setMonth(now.getMonth());
+    date.setFullYear(now.getFullYear());
+  }
   switch (preset) {
     case presets.today:
       date.setDate(now.getDate());
@@ -37,19 +54,19 @@ const handlePresetClick = (preset, initialDate, setDate) => (e) => {
       date.setDate(now.getDate() + 1);
       break;
     case presets.nextMonday:
-      date.setDate(now.getDate() + ((8 - now.getDay()) % 7));
+      date.setDate(now.getDate() + ((1 - now.getDay()) % 7) + 7);
       break;
     case presets.nextTuesday:
-      date.setDate(now.getDate() + ((9 - now.getDay()) % 7));
+      date.setDate(now.getDate() + ((2 - now.getDay()) % 7) + 7);
       break;
     case presets.nextWednesday:
-      date.setDate(now.getDate() + ((10 - now.getDay()) % 7));
+      date.setDate(now.getDate() + ((3 - now.getDay()) % 7) + 7);
       break;
     case presets.nextThursday:
-      date.setDate(now.getDate() + ((11 - now.getDay()) % 7));
+      date.setDate(now.getDate() + ((4 - now.getDay()) % 7) + 7);
       break;
     case presets.nextFriday:
-      date.setDate(now.getDate() + ((12 - now.getDay()) % 7));
+      date.setDate(now.getDate() + ((5 - now.getDay()) % 7) + 7);
       break;
     case presets.morning:
       date.setHours(9);
@@ -91,15 +108,15 @@ const isActive = (preset, date) => {
     case presets.tomorrow:
       return day === now.getDate() + 1;
     case presets.nextMonday:
-      return day === now.getDate() + ((8 - now.getDay()) % 7);
+      return day === now.getDate() + ((8 - now.getDay()) % 7) + 7;
     case presets.nextTuesday:
-      return day === now.getDate() + ((9 - now.getDay()) % 7);
+      return day === now.getDate() + ((9 - now.getDay()) % 7) + 7;
     case presets.nextWednesday:
-      return day === now.getDate() + ((10 - now.getDay()) % 7);
+      return day === now.getDate() + ((10 - now.getDay()) % 7) + 7;
     case presets.nextThursday:
-      return day === now.getDate() + ((11 - now.getDay()) % 7);
+      return day === now.getDate() + ((11 - now.getDay()) % 7) + 7;
     case presets.nextFriday:
-      return day === now.getDate() + ((12 - now.getDay()) % 7);
+      return day === now.getDate() + ((12 - now.getDay()) % 7) + 7;
     case presets.morning:
       return minutes === 0 && hours === 9;
     case presets.noon:
