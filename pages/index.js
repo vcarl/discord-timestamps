@@ -113,6 +113,10 @@ export default function Home() {
               Carl Vitullo
             </a>{" "}
             <a href="https://bsky.app/profile/vcarl.bsky.social">(vcarl)</a> |{" "}
+            <a href="https://github.com/vcarl/discord-timestamps">GitHub</a> |{" "}
+            <a href="https://github.com/vcarl/discord-timestamps/issues/new">
+              Report a bug
+            </a>
           </p>
           <p>
             Need help with a community?{" "}
