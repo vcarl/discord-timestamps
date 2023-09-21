@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef } from "react";
 import ReactTimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import { throttle } from "lodash";
+import TimezonePicker from "./TimezonePicker";
+import { getOffsetBetweenTimezones } from "../helpers/timezones";
 
 /**
  * Given a center point and an angle, create a projection function that accepts
@@ -109,7 +111,15 @@ const handleDrag = (
 /**
  * @param {import('react-time-picker').TimePickerProps} props
  */
-export default function TimePicker({ onChange, value, className, ...props }) {
+export default function TimePicker({
+  onChange,
+  value,
+  className,
+  timezone,
+  locale,
+  onTimezoneChange,
+  ...props
+}) {
   const valueRef = useRef(value);
   valueRef.current = value;
   /** @type {import('react-time-picker').TimePickerProps["onChange"]} */
@@ -168,7 +178,7 @@ export default function TimePicker({ onChange, value, className, ...props }) {
   });
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`control relative flex flex-col ${className}`}>
       <div className="z-10 absolute top-0 left-0 pl-3 pt-2.5">
         <SkipButton
           label="-30"
@@ -192,7 +202,7 @@ export default function TimePicker({ onChange, value, className, ...props }) {
         </SkipButton>
       </div>
       <ReactTimePicker
-        className="control"
+        className="px-3 pt-2.5"
         clearIcon={null}
         clockIcon={null}
         renderSecondHand={false}
@@ -205,8 +215,11 @@ export default function TimePicker({ onChange, value, className, ...props }) {
         isOpen={true}
         onChange={innerOnChange}
         value={value}
+        locale={locale}
         {...props}
       />
+
+      <TimezonePicker value={timezone} onChange={onTimezoneChange} />
     </div>
   );
 }

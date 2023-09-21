@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@turf/turf": "^6.5.0",
     "@types/react": "^18.2.21",
     "date-fns": "^2.30.0",
     "lodash": "^4.17.21",

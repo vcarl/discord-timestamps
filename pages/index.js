@@ -1,6 +1,4 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -9,6 +7,7 @@ import TimePicker from "../components/TimePicker";
 import DiscordTimestamps from "../components/DiscordTimestamps";
 import ForceClient from "../components/ForceClient";
 import { Presets } from "../components/Presets";
+import { getOffsetBetweenTimezones } from "../helpers/timezones";
 
 const now = new Date();
 now.setMinutes(0);
@@ -40,6 +39,28 @@ export default function Home() {
     gtag("config", "G-3BBW7XEREH");
   });
 
+  const [{ calendar, locale, timeZone: tz }, setTz] = useState({
+    calendar: "gregory",
+    locale: "en-US",
+    timeZone: "",
+  });
+  useEffect(() => {
+    const dateTimeFormat = new Intl.DateTimeFormat(navigator.language);
+    const { calendar, locale, timeZone } = dateTimeFormat.resolvedOptions();
+    setTz({ calendar, locale, timeZone });
+  }, []);
+
+  const calcaulatedDatetime = useMemo(() => {
+    if (!tz) return datetime;
+    const finalDate = new Date(datetime);
+
+    const dateTimeFormat = new Intl.DateTimeFormat(navigator.language);
+    const { timeZone: localTz } = dateTimeFormat.resolvedOptions();
+    const offset = getOffsetBetweenTimezones(localTz, tz);
+    finalDate.setMinutes(finalDate.getMinutes() + 60 * offset);
+    return finalDate;
+  }, [datetime, tz]);
+
   return (
     <>
       <Head>
@@ -58,21 +79,30 @@ export default function Home() {
       <div className="grid md:grid-rows-layout md:grid-cols-layout">
         <Nav className="md:col-start-2" />
         <main className="py-16 pl-10 pr-5 overflow-hidden">
-          <Presets className="mb-4" date={datetime} setDate={setDate} />
+          <div className="flex flex-col md:flex-row">
+            <Presets className="mb-4" date={datetime} setDate={setDate} />
+          </div>
           <ForceClient>
             <div className="flex -ml-2 pb-6 md:flex-row flex-col">
               <DatePicker
-                className="md:mx-2 md:my-0 mx-auto my-2"
+                locale={locale}
+                className="basis-1/2 grow-1 md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
                 onChange={setDate}
+                calendarType={calendar}
               />
               <TimePicker
-                className="md:mx-2 md:my-0 mx-auto my-2"
+                locale={locale}
+                className="grow-0 md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
                 onChange={setDate}
+                timezone={tz}
+                onTimezoneChange={(tz) =>
+                  setTz((old) => ({ ...old, timeZone: tz }))
+                }
               />
             </div>
-            <DiscordTimestamps datetime={datetime} />
+            <DiscordTimestamps datetime={calcaulatedDatetime} />
           </ForceClient>
         </main>
         <div className="bg-fill md:block hidden" />
@@ -83,9 +113,6 @@ export default function Home() {
               Carl Vitullo
             </a>{" "}
             <a href="https://bsky.app/profile/vcarl.bsky.social">(vcarl)</a> |{" "}
-            <a href="https://github.com/vcarl/discord-timestamps">
-              Project GitHub
-            </a>
           </p>
           <p>
             Need help with a community?{" "}

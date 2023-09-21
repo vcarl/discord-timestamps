@@ -12,9 +12,6 @@
   padding-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  max-width: 98vw;
-  overflow: auto;
-  width: 15.5rem;
 }
 
 .react-calendar__month-view__days {
