@@ -52,7 +52,7 @@
   flex-grow: 0;
   border: 0;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 }
 .react-time-picker .react-time-picker__clock {
   display: unset;
