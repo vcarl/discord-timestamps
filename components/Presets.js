@@ -87,15 +87,15 @@ const isActive = (preset, date) => {
   const day = date.getDate();
   switch (preset) {
     case presets.nextMonday:
-      return day === now.getDate() + ((8 - now.getDay()) % 7) + 7;
+      return day === now.getDate() + ((1 - now.getDay()) % 7) + 7;
     case presets.nextTuesday:
-      return day === now.getDate() + ((9 - now.getDay()) % 7) + 7;
+      return day === now.getDate() + ((2 - now.getDay()) % 7) + 7;
     case presets.nextWednesday:
-      return day === now.getDate() + ((10 - now.getDay()) % 7) + 7;
+      return day === now.getDate() + ((3 - now.getDay()) % 7) + 7;
     case presets.nextThursday:
-      return day === now.getDate() + ((11 - now.getDay()) % 7) + 7;
+      return day === now.getDate() + ((4 - now.getDay()) % 7) + 7;
     case presets.nextFriday:
-      return day === now.getDate() + ((12 - now.getDay()) % 7) + 7;
+      return day === now.getDate() + ((5 - now.getDay()) % 7) + 7;
     case presets.morning:
       return minutes === 0 && hours === 9;
     case presets.noon:
