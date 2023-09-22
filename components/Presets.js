@@ -113,7 +113,22 @@ export const Presets = ({ className, date, setDate }) => {
   return (
     <div className={`${className}`}>
       <PresetRow>
-        <div className="mr-2 mb-2 text-sm py-1">Next:</div>
+        <PresetButton preset="morning" date={date} setDate={setDate}>
+          9am
+        </PresetButton>
+        <PresetButton preset="noon" date={date} setDate={setDate}>
+          noon
+        </PresetButton>
+        <PresetButton preset="evening" date={date} setDate={setDate}>
+          6pm
+        </PresetButton>
+        <PresetButton preset="night" date={date} setDate={setDate}>
+          9pm
+        </PresetButton>
+      </PresetRow>
+
+      <h2 className="mr-2 mb-1 px-2">Next week:</h2>
+      <PresetRow>
         <PresetButton preset={presets.nextMonday} date={date} setDate={setDate}>
           M
         </PresetButton>
@@ -142,28 +157,13 @@ export const Presets = ({ className, date, setDate }) => {
           F
         </PresetButton>
       </PresetRow>
-
-      <PresetRow>
-        <PresetButton preset="morning" date={date} setDate={setDate}>
-          9am
-        </PresetButton>
-        <PresetButton preset="noon" date={date} setDate={setDate}>
-          noon
-        </PresetButton>
-        <PresetButton preset="evening" date={date} setDate={setDate}>
-          6pm
-        </PresetButton>
-        <PresetButton preset="night" date={date} setDate={setDate}>
-          9pm
-        </PresetButton>
-      </PresetRow>
     </div>
   );
 };
 
 const PresetRow = ({ className = "", children }) => {
   return (
-    <div className={`${className} flex flex-row justify-left flex-wrap`}>
+    <div className={`${className} flex flex-row justify-stretch mb-2`}>
       {children}
     </div>
   );
@@ -174,7 +174,7 @@ const PresetButton = ({ children, className = "", preset, setDate, date }) => {
     <button
       className={`${className} ${style.button} ${
         isActive(preset, date) ? style.active : ""
-      } whitespace-nowrap mr-2 mb-2 text-sm px-4 py-1`}
+      } whitespace-nowrap text-sm px-2 py-1`}
       onClick={handlePresetClick(preset, date, setDate)}
     >
       {children}

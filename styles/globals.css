@@ -68,6 +68,15 @@ h1 {
   text-transform: uppercase;
   font-weight: 700;
 }
+h1:not(:first-child) {
+  margin-top: 0.5rem;
+}
+h2 {
+  color: rgba(148, 155, 164, 0.6);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 
 .control {
   border-radius: 0.3rem;

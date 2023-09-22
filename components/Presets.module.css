@@ -1,7 +1,19 @@
 .button {
-  border-radius: 0.1875rem;
+  flex-grow: 1;
   border: 1px solid rgb(78, 80, 88);
+  border-right: 1px solid rgb(78, 80, 88);
+  border-left: none;
   transition: background 0.2s ease 0s;
+}
+.button:first-of-type {
+  border-left: 1px solid rgb(78, 80, 88);
+  border-top-left-radius: 0.1875rem;
+  border-bottom-left-radius: 0.1875rem;
+}
+.button:last-of-type {
+  border-right: 1px solid rgb(78, 80, 88);
+  border-top-right-radius: 0.1875rem;
+  border-bottom-right-radius: 0.1875rem;
 }
 .button:hover {
   background-color: rgb(78, 80, 88);

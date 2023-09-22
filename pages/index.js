@@ -16,15 +16,12 @@ now.setSeconds(0);
 const NavItem = ({ children, className }) => {
   return <li className={`${className} px-2 py-1`}>{children}</li>;
 };
-
-const Nav = ({ className }) => {
+const NavList = ({ children, className, title }) => {
   return (
-    <nav className={`${className} py-[3.75rem] pl-5 pr-3`}>
-      <h1 className="px-2 py-1">A Reactiflux Project</h1>
-      <ul>
-        <NavItem className="active">Timestamp Generator</NavItem>
-      </ul>
-    </nav>
+    <>
+      <h1 className={`${className} px-2 py-1`}>{title}</h1>
+      <ul>{children}</ul>
+    </>
   );
 };
 
@@ -77,11 +74,15 @@ export default function Home() {
       ></Script>
 
       <div className="grid md:grid-rows-layout md:grid-cols-layout">
-        <Nav className="md:col-start-2" />
-        <main className="py-16 pl-10 pr-5 overflow-hidden">
-          <div className="flex flex-col md:flex-row">
+        <nav className={`md:col-start-2 py-[3.75rem] pl-5 pr-3`}>
+          <NavList title="A Reactiflux Project">
+            <NavItem className="active">Timestamp Generator</NavItem>
+          </NavList>
+          <NavList title="Presets">
             <Presets className="mb-4" date={datetime} setDate={setDate} />
-          </div>
+          </NavList>
+        </nav>
+        <main className="py-16 pl-10 pr-5 overflow-hidden">
           <ForceClient>
             <div className="flex -ml-2 pb-6 md:flex-row flex-col">
               <DatePicker
