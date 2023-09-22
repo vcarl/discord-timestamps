@@ -78,6 +78,17 @@
   font-family: monospace;
 }
 
+.react-calendar__navigation__label {
+  border: 1px solid rgb(78, 80, 88);
+  border-radius: 0.1875rem;
+  transition: background 0.2s ease 0s;
+  margin-top: 0.25rem;
+  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
+}
+.react-calendar__navigation__label:hover {
+  background-color: rgb(78, 80, 88);
+}
+
 .react-calendar__navigation__label__labelText,
 .react-calendar__year-view abbr,
 .react-calendar__decade-view abbr {

@@ -82,3 +82,6 @@ h2 {
   border-radius: 0.3rem;
   box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
 }
+select {
+  border: 1px solid rgb(78, 80, 88);
+}

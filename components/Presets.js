@@ -163,7 +163,9 @@ export const Presets = ({ className, date, setDate }) => {
 
 const PresetRow = ({ className = "", children }) => {
   return (
-    <div className={`${className} flex flex-row justify-stretch mb-2`}>
+    <div
+      className={`${className} ${style.presetRow} flex flex-row justify-stretch mb-2 `}
+    >
       {children}
     </div>
   );

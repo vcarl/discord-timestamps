@@ -13,7 +13,7 @@
   display: block;
   content: "(drag the hands)";
   position: absolute;
-  top: 2.8rem;
+  top: 2.5rem;
   margin-left: -0.75rem;
   width: 100%;
   text-align: center;
@@ -34,8 +34,10 @@
   font-size: 1rem;
   font-style: bold;
   text-transform: uppercase;
+  line-height: 1;
   font-family: Helvetica;
   border: 1px solid rgb(78, 80, 88);
+  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
   border-radius: 0.1875rem;
   padding: 0.125rem 1rem;
 }

@@ -24,3 +24,8 @@
   border-color: rgb(88, 101, 242);
   color: #fff;
 }
+
+.presetRow {
+  border-radius: 0.1875rem;
+  box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
+}
