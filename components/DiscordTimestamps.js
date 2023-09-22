@@ -1,20 +1,13 @@
 import { formatDate } from "../helpers/dates";
-import { CopyButton } from "./Copy";
-import style from "./DiscordTimestamps.module.css";
+import Timestamp from "./Timestamp";
 
 const TimestampRow = ({ unixTime, format }) => {
   const stamp = `<t:${unixTime}:${format}>`;
   return (
-    <div className="flex">
-      <div>
-        <code className={`${style.timestamp} p-1 -my-2`}>{stamp}</code>{" "}
-      </div>
-      <CopyButton className="w-4 flex-shrink-0" text={stamp} />
-      <div className="max-w-[5rem]">
-        <span className={`${style.formattedTime}`}>
-          {formatDate(unixTime, format)}
-        </span>
-      </div>
+    <div className="flex mb-1">
+      <Timestamp showCode text={stamp} className="flex">
+        {formatDate(unixTime, format)}
+      </Timestamp>
     </div>
   );
 };
@@ -30,17 +23,18 @@ const DiscordTimestamps = ({ datetime, className }) => {
   const unixTime = Number(Math.floor(datetime / 1000));
   return (
     <div className={`${className}`}>
-      <p>
-        Copy full date
-        <CopyButton
-          className="w-4 flex-shrink-0"
-          text={`<t:${unixTime}:f>, <t:${unixTime}:R>`}
-        />
-      </p>
-      <span className={`${style.formattedTime}`}>
-        {" "}
-        {formatDate(unixTime, "f")}, {formatDate(unixTime, "R")}
-      </span>
+      <div>
+        <p>Copy full date</p>
+        <Timestamp
+          text={`<t:${unixTime}:d> <t:${unixTime}:t>, <t:${unixTime}:R>`}
+        >
+          {formatDate(unixTime, "d")} {formatDate(unixTime, "t")},{" "}
+          {formatDate(unixTime, "R")}
+        </Timestamp>
+        <Timestamp text={`<t:${unixTime}:f>, <t:${unixTime}:R>`}>
+          {formatDate(unixTime, "f")}, {formatDate(unixTime, "R")}
+        </Timestamp>
+      </div>
       <div className="hr" />
       {formats.map((f) => (
         <TimestampRow key={f} unixTime={unixTime} format={f} />

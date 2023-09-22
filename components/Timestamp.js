@@ -1,10 +1,16 @@
 import { useCallback, useState } from "react";
-import style from "./Copy.module.css";
+import style from "./Timestamp.module.css";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 //  Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.
-export const CopyButton = ({ text, className, ...props }) => {
+const Timestamp = ({
+  text,
+  showCode = false,
+  className = "",
+  children,
+  ...props
+}) => {
   const [copied, setCopied] = useState(false);
   const handleClick = useCallback(() => {
     (async () => {
@@ -15,15 +21,23 @@ export const CopyButton = ({ text, className, ...props }) => {
     })();
   }, [text]);
   return (
-    <button
-      {...props}
-      className={`${className} p-1 w-5 h-5 ml-1 mr-2`}
-      onClick={handleClick}
-    >
-      {copied ? <Check /> : <Copy />}
-    </button>
+    <>
+      <button {...props} className={`${className}`} onClick={handleClick}>
+        {showCode && (
+          <span>
+            <code className={`${style.timestamp} p-1 -my-2`}>{text}</code>{" "}
+          </span>
+        )}
+        <div className="inline-block p-0.5 w-5 h-5 ml-1 mr-1">
+          {copied ? <Check /> : <Copy />}
+        </div>
+        <span className={`${style.formattedTime}`}>{children}</span>
+      </button>
+    </>
   );
 };
+
+export default Timestamp;
 
 const Copy = () => (
   <svg
