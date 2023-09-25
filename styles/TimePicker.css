@@ -40,6 +40,7 @@
   box-shadow: rgba(30, 31, 34, 0.6) 0px 0px 0px 1px;
   border-radius: 0.1875rem;
   padding: 0.125rem 1rem;
+  min-width: unset;
 }
 
 .react-time-picker__inputGroup__input {

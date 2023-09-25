@@ -36,15 +36,14 @@ export default function Home() {
     gtag("config", "G-3BBW7XEREH");
   });
 
-  const [{ calendar, locale, timeZone: tz }, setTz] = useState({
-    calendar: "gregory",
+  const [{ locale, timeZone: tz }, setTz] = useState({
     locale: "en-US",
     timeZone: "",
   });
   useEffect(() => {
     const dateTimeFormat = new Intl.DateTimeFormat(navigator.language);
-    const { calendar, locale, timeZone } = dateTimeFormat.resolvedOptions();
-    setTz({ calendar, locale, timeZone });
+    const { locale, timeZone } = dateTimeFormat.resolvedOptions();
+    setTz({ locale, timeZone });
   }, []);
 
   const calcaulatedDatetime = useMemo(() => {
@@ -90,7 +89,6 @@ export default function Home() {
                 className="basis-1/2 grow-1 md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
                 onChange={setDate}
-                calendarType={calendar}
               />
               <TimePicker
                 locale={locale}
