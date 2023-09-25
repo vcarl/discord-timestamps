@@ -86,9 +86,15 @@ const handleDrag = (
 
     // UX: Snap to nearest segment
     let changedAngle = angle / (360 / clockSegments);
-    // UX: Make fine adjustments easier by always moving at least 1 tick
-    changedAngle =
-      changedAngle > 0 ? Math.ceil(changedAngle) : Math.floor(changedAngle);
+    // UX: Make fine adjustments easier by always moving at least 1 tick, but
+    // round normally if it's a larger change
+    const roundingFunc =
+      Math.abs(changedAngle) > 20
+        ? Math.round
+        : changedAngle > 0
+        ? Math.ceil
+        : Math.floor;
+    changedAngle = roundingFunc(changedAngle);
     // Reset state
     angle = undefined;
     projection = undefined;
