@@ -12,7 +12,7 @@ const TimestampRow = ({ unixTime, format }) => {
   );
 };
 
-const formats = ["t", "T", "d", "D", "f", "F", "R"];
+const formats = ["R", "t", "T", "d", "D", "f", "F", "S"];
 /**
  *
  * @param {Object} props
