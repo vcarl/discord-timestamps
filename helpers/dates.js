@@ -15,6 +15,8 @@ export const formatDate = (timestamp, formatType) => {
       return format(date, "MMMM d, yyyy h:mm a");
     case "F":
       return format(date, "EEEE, MMMM d, yyyy h:mm a");
+    case "S":
+      return format(date, "MM/dd/yy, hh:mm:ss");
     case "R":
       return formatDistance(date, new Date(), { addSuffix: true });
     default:
