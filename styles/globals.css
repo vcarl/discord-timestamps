@@ -62,20 +62,64 @@ main {
   background-color: rgb(49, 51, 56);
 }
 
-h1 {
+.nav-heading {
   color: rgb(148, 155, 164);
   font-size: 0.75rem;
   text-transform: uppercase;
   font-weight: 700;
 }
-h1:not(:first-child) {
+.nav-heading:not(:first-child) {
   margin-top: 0.5rem;
 }
-h2 {
+.sublabel {
   color: rgba(148, 155, 164, 0.6);
   font-size: 0.65rem;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.page-title {
+  color: rgb(242, 243, 245);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.guide {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.guide p {
+  margin-bottom: 0.75rem;
+}
+.guide-h2 {
+  color: rgb(242, 243, 245);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.5rem;
+}
+.guide-h3 {
+  color: rgb(219, 222, 225);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.75rem;
+}
+.guide-table th,
+.guide-table td {
+  text-align: left;
+  padding: 0.4rem 0.6rem 0.4rem 0;
+  border-bottom: 1px solid rgba(78, 80, 88, 0.48);
+  white-space: nowrap;
+}
+.guide-table th {
+  color: rgb(148, 155, 164);
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
 
 .control {

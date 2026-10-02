@@ -7,6 +7,7 @@ import TimePicker from "../components/TimePicker";
 import DiscordTimestamps from "../components/DiscordTimestamps";
 import ForceClient from "../components/ForceClient";
 import { Presets } from "../components/Presets";
+import TimestampGuide, { FAQS } from "../components/TimestampGuide";
 import { getOffsetBetweenTimezones } from "../helpers/timezones";
 
 const now = new Date();
@@ -16,13 +17,47 @@ now.setSeconds(0);
 const NavItem = ({ children, className }) => {
   return <li className={`${className} px-2 py-1`}>{children}</li>;
 };
-const NavList = ({ children, className, title }) => {
+const NavList = ({ children, className = "", title }) => {
   return (
     <>
-      <h1 className={`${className} px-2 py-1`}>{title}</h1>
+      <p className={`nav-heading ${className} px-2 py-1`}>{title}</p>
       <ul>{children}</ul>
     </>
   );
+};
+
+const SITE_URL = "https://www.discordtimestamps.com/";
+const TITLE = "Discord Timestamp Generator – Convert Time to <t:> Codes";
+const DESCRIPTION =
+  "Free Discord timestamp generator. Pick a date, time and time zone, then copy a <t:> code that shows in every reader's local time, including relative time.";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "Discord Timestamp Generator",
+      url: SITE_URL,
+      description: DESCRIPTION,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      author: {
+        "@type": "Person",
+        name: "Carl Vitullo",
+        url: "https://bsky.app/profile/vcarl.bsky.social",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: FAQS.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    },
+  ],
 };
 
 export default function Home() {
@@ -60,12 +95,23 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Discord Timestamps</title>
-        <meta
-          name="description"
-          content="A simple app for generating relative timestamps in Discord. A Reactiflux project by vcarl."
-        />
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
+        <link rel="canonical" href={SITE_URL} />
+        <meta name="theme-color" content="#2b2d31" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Discord Timestamps" />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </Head>
       <Script
         async
@@ -82,7 +128,17 @@ export default function Home() {
           </NavList>
         </nav>
         <main className="py-16 pl-10 pr-5 overflow-hidden">
-          <ForceClient>
+          <h1 className="page-title">Discord Timestamp Generator</h1>
+          <p className="mb-6">
+            Pick a date, time and time zone, then click a format to copy its
+            Discord timestamp code. Paste it into any message and everyone sees
+            the time in their own time zone.
+          </p>
+          <ForceClient
+            fallback={
+              <p className="pb-6">Loading the timestamp generator…</p>
+            }
+          >
             <div className="flex -ml-2 pb-6 md:flex-row flex-col">
               <DatePicker
                 locale={locale}
@@ -103,6 +159,7 @@ export default function Home() {
             </div>
             <DiscordTimestamps datetime={calcaulatedDatetime} />
           </ForceClient>
+          <TimestampGuide />
         </main>
         <div className="bg-fill md:block hidden" />
         <footer className="md:col-span-2 md:col-start-2 py-24 px-5">
