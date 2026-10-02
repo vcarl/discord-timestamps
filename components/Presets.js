@@ -161,7 +161,7 @@ export const Presets = ({ className, date, setDate }) => {
         </PresetButton>
       </PresetRow>
 
-      <h2 className="mr-2 mb-1 px-2">Next week:</h2>
+      <p className="sublabel mr-2 mb-1 px-2">Next week:</p>
       <PresetRow>
         <PresetButton preset={presets.nextMonday} date={date} setDate={setDate}>
           M
