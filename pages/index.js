@@ -9,6 +9,7 @@ import ForceClient from "../components/ForceClient";
 import { Presets } from "../components/Presets";
 import TimestampGuide, { FAQS } from "../components/TimestampGuide";
 import { getOffsetBetweenTimezones } from "../helpers/timezones";
+import { GA_ID, initAnalytics } from "../helpers/analytics";
 
 const now = new Date();
 now.setMinutes(0);
@@ -62,14 +63,11 @@ const structuredData = {
 
 export default function Home() {
   const [datetime, setDate] = useState(now);
+  // Run once on mount. Without the empty dependency array this re-sent a
+  // page_view on every re-render (e.g. each date/time change).
   useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-    gtag("config", "G-3BBW7XEREH");
-  });
+    initAnalytics();
+  }, []);
 
   const [{ locale, timeZone: tz }, setTz] = useState({
     locale: "en-US",
@@ -115,7 +113,7 @@ export default function Home() {
       </Head>
       <Script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=G-3BBW7XEREH"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       ></Script>
 
       <div className="grid md:grid-rows-layout md:grid-cols-layout">

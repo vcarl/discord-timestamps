@@ -1,11 +1,13 @@
 import { useCallback, useState } from "react";
 import style from "./Timestamp.module.css";
+import { trackCopy } from "../helpers/analytics";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 //  Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc.
 const Timestamp = ({
   text,
+  format = "combined",
   showCode = false,
   className = "",
   children,
@@ -15,11 +17,12 @@ const Timestamp = ({
   const handleClick = useCallback(() => {
     (async () => {
       navigator.clipboard.writeText(text);
+      trackCopy(format);
       setCopied(true);
       await sleep(2000);
       setCopied(false);
     })();
-  }, [text]);
+  }, [text, format]);
   return (
     <>
       <button {...props} className={`${className}`} onClick={handleClick}>
