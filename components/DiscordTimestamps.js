@@ -5,7 +5,7 @@ const TimestampRow = ({ unixTime, format }) => {
   const stamp = `<t:${unixTime}:${format}>`;
   return (
     <div className="flex mb-1">
-      <Timestamp showCode text={stamp} className="flex">
+      <Timestamp showCode text={stamp} format={format} className="flex">
         {formatDate(unixTime, format)}
       </Timestamp>
     </div>
