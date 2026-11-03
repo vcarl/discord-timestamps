@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -8,8 +8,10 @@ import DiscordTimestamps from "../components/DiscordTimestamps";
 import ForceClient from "../components/ForceClient";
 import { Presets } from "../components/Presets";
 import TimestampGuide, { FAQS } from "../components/TimestampGuide";
-import { getOffsetBetweenTimezones } from "../helpers/timezones";
+import { wallTimeToInstant, instantToWallTime } from "../helpers/timezones";
 import { GA_ID, initAnalytics } from "../helpers/analytics";
+import { parseShareParams, buildShareQuery } from "../helpers/shareLink";
+import ShareLink from "../components/ShareLink";
 
 const now = new Date();
 now.setMinutes(0);
@@ -73,22 +75,47 @@ export default function Home() {
     locale: "en-US",
     timeZone: "",
   });
+  // Only write ?t=…&tz=… to the address bar once the visitor has picked a
+  // time (or arrived on a shared link), so the bare homepage stays clean.
+  const syncUrl = useRef(false);
+
   useEffect(() => {
     const dateTimeFormat = new Intl.DateTimeFormat(navigator.language);
-    const { locale, timeZone } = dateTimeFormat.resolvedOptions();
+    const { locale, timeZone: localTz } = dateTimeFormat.resolvedOptions();
+    const shared = parseShareParams(window.location.search);
+    if (!shared) {
+      setTz({ locale, timeZone: localTz });
+      return;
+    }
+    const timeZone = shared.tz || localTz;
+    setDate(instantToWallTime(new Date(shared.t * 1000), localTz, timeZone));
     setTz({ locale, timeZone });
+    syncUrl.current = true;
+  }, []);
+
+  const changeDate = useCallback((date) => {
+    syncUrl.current = true;
+    setDate(date);
+  }, []);
+  const changeTz = useCallback((timeZone) => {
+    syncUrl.current = true;
+    setTz((old) => ({ ...old, timeZone }));
   }, []);
 
   const calcaulatedDatetime = useMemo(() => {
     if (!tz) return datetime;
-    const finalDate = new Date(datetime);
-
-    const dateTimeFormat = new Intl.DateTimeFormat(navigator.language);
-    const { timeZone: localTz } = dateTimeFormat.resolvedOptions();
-    const offset = getOffsetBetweenTimezones(localTz, tz);
-    finalDate.setMinutes(finalDate.getMinutes() + 60 * offset);
-    return finalDate;
+    const { timeZone: localTz } = new Intl.DateTimeFormat(
+      navigator.language,
+    ).resolvedOptions();
+    return wallTimeToInstant(datetime, localTz, tz);
   }, [datetime, tz]);
+
+  const unixTime = Math.floor(calcaulatedDatetime / 1000);
+  const shareQuery = buildShareQuery(unixTime, tz);
+  useEffect(() => {
+    if (!syncUrl.current || !tz) return;
+    window.history.replaceState(window.history.state, "", shareQuery);
+  }, [shareQuery, tz]);
 
   return (
     <>
@@ -122,7 +149,7 @@ export default function Home() {
             <NavItem className="active">Timestamp Generator</NavItem>
           </NavList>
           <NavList title="Presets">
-            <Presets className="mb-4" date={datetime} setDate={setDate} />
+            <Presets className="mb-4" date={datetime} setDate={changeDate} />
           </NavList>
         </nav>
         <main className="py-16 pl-10 pr-5 overflow-hidden">
@@ -142,20 +169,19 @@ export default function Home() {
                 locale={locale}
                 className="basis-1/2 grow-1 md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
-                onChange={setDate}
+                onChange={changeDate}
               />
               <TimePicker
                 locale={locale}
                 className="grow-0 md:mx-2 md:my-0 mx-auto my-2"
                 value={datetime}
-                onChange={setDate}
+                onChange={changeDate}
                 timezone={tz}
-                onTimezoneChange={(tz) =>
-                  setTz((old) => ({ ...old, timeZone: tz }))
-                }
+                onTimezoneChange={changeTz}
               />
             </div>
             <DiscordTimestamps datetime={calcaulatedDatetime} />
+            <ShareLink query={shareQuery} />
           </ForceClient>
           <TimestampGuide />
         </main>
