@@ -28,7 +28,7 @@ const NavList = ({ children, className = "", title }) => {
 };
 
 const SITE_URL = "https://www.discordtimestamps.com/";
-const TITLE = "Discord Timestamp Generator – Convert Time to <t:> Codes";
+const TITLE = "Discord Timestamps – Free Timestamp Generator & Time Converter";
 const DESCRIPTION =
   "Free Discord timestamp generator. Pick a date, time and time zone, then copy a <t:> code that shows in every reader's local time, including relative time.";
 
