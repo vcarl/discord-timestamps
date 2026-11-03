@@ -31,6 +31,10 @@ const TimezonePicker = ({ value, onChange }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
+        {/* Zones from shared links may not be in the list; keep them selectable */}
+        {value && !tzs.some((tz) => tz.tz === value) && (
+          <option value={value}>{value}</option>
+        )}
         {tzs.map((tz) => (
           <option key={tz.tz} value={tz.tz}>
             {tz.tz} ({tz.zone})

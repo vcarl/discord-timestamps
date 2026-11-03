@@ -14,7 +14,8 @@ export const initAnalytics = () => {
 
 /**
  * Record a copy of a timestamp code. `format` is the Discord style letter
- * (R, t, T, d, D, f, F, S) or "combined" for the multi-code presets.
+ * (R, t, T, d, D, f, F, S), "combined" for the multi-code presets, or "link"
+ * for the shareable link.
  */
 export const trackCopy = (format) => {
   gtag("event", "copy_timestamp", { format });

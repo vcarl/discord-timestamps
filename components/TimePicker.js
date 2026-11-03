@@ -3,7 +3,6 @@ import ReactTimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import { throttle } from "lodash";
 import TimezonePicker from "./TimezonePicker";
-import { getOffsetBetweenTimezones } from "../helpers/timezones";
 
 /**
  * Given a center point and an angle, create a projection function that accepts
